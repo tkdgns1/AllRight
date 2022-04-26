@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap Real Estate Website Template">
+    <meta name="author" content="KimaroTec">
+
+    <title>ASAD ESTATE | Real Estate bootstrap Website Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Ico font CSS -->
+    <link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="fonts/icofont/css/icofont.css" rel="stylesheet">
+    <link href="fonts/themify-icons/themify-icons.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,300italic,400italic' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-in.html" />
+    <link href="css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body>
+<!-- /.preloader -->
+<div id="top"></div>
+
+<!-- 맨위 상단바 -->
+<section class="top_bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="top_bar_info">
+                    <p><i class="fa fa-phone"></i>031-xxxx-xxxx</p>
+                    <p><i class="fa fa-envelope"></i>ICIA@co.kr</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right pl0">
+                <!--<div class="top_bar_social">
+                    <a class="fac" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="twi" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="goo" href="#"><i class="fa fa-google-plus"></i></a>
+                    <a class="lin" href="#"><i class="fa fa-linkedin"></i></a>
+                </div>-->
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right ">
+
+
+                <div class="langue-currency-menu ">
+                    <div class="dropdown">
+                        <a th:if="${session.loginId eq null}" onclick="location.href='index'">
+                            <button  type="button"data-toggle="dropdown" aria-haspopup="true">
+                                홈으로
+                            </button>
+                        </a>
+                    </div>
+
+
+
+
+                    <div class="dropdown">
+
+                        <a th:if="${session.loginId eq null}" onclick="location.href='JoinForm'">
+                            <button class="btn-dropdown dropdown-toggle" type="button"data-toggle="dropdown" aria-haspopup="true">
+                                회원가입</button></a>
+                        <a th:if="${session.loginId ne null}" th:text="${session.loginId}"></a>
+
+                    </div> <!-- End .dropdown -->
+                    <!-- 로그인을 하지 않았을 경우-->
+                    <div th:if="${session.loginId eq null}" class="dropdown">
+                        <a href="loginForm"><button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            로그인
+                        </button></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="loginForm">로그인</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 로그인 했을 경우 -->
+                    <div th:if="${session.loginId ne null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            MyPage <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                            <li><a th:href="@{mqList(qId=${session.loginId})}">문의목록</a></li>
+                            <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                            <li><a th:href="@{revList(reId=${session.loginId})}">후기목록</a><li>
+                            <li><a th:href="@{eList(eId=${session.loginId})}">주차완료리스트</a><li>
+                            <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                            <li><a onclick="location.href='mLogout'">로그아웃</a></li>
+                        </ul>
+                    </div>
+
+
+
+                    <!-- End .dropdown -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- 맨위 상단바 끝-->
+
+
+
+<!-- 중앙위 배너 -->
+<section id="one-parallax" class="post-wrapper-top dm-shadow clearfix parallax" style="background-image: url('img/skyblue.png');" data-stellar-background-ratio="0.6" data-stellar-vertical-offset="20">
+    <div class="overlay1 dm-shadow">
+        <div class="container">
+            <div class="post-wrapper-top-shadow">
+                <span class="s1"></span>
+            </div>
+            <div class="col-lg-12">
+
+                <h2>AllRight Parking</h2>
+            </div>
+        </div>
+    </div>
+</section><!-- end post-wrapper-top -->
+<!-- 중앙위 배너 끝-->
+
+<main class="d-flex w-100">
+
+
+    <div class="container d-flex flex-column">
+        <div class="row vh-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
+
+                    <div class="text-center mt-4">
+                        <h1 class="h2">로그인</h1>
+                        <p class="lead">
+                            아이디와 비밀번호를 입력해주세요
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                <div class="text-center">
+                                    <img src="img/park1.png" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
+                                </div>
+                                <form action="mLogin" method="POST">
+                                    <div class="mb-3">
+                                        <label class="form-label">아이디</label>
+                                        <input class="form-control form-control-lg" type="text" name="mId" placeholder="Enter your ID" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">비밀번호</label>
+                                        <input class="form-control form-control-lg" type="password" name="mPw" placeholder="Enter your password" />
+
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <input type="submit" class="btn btn-lg btn-primary" value="로그인" />
+                                        <!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- footer 전체 -->
+<div class="callout dark"><!-- add "styleBackgroundColor" class for colored background and white text OR "dark" for a dark callout -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9"><!-- title + shortdesc -->
+
+                <p>ICIA <strong>Allright</strong> for free!</p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <!-- col #1 -->
+            <div class="logo_footer dark col-md-4">
+                <img alt="park" src="img/park1.png" class="footer-logo">
+                <p class="block">
+                    인천광역시 미추홀구 매소홀로 488번길 6-32 태승빌딩 5층<br>
+
+                    Email:icia@icia.com<br>
+                    Phone: 0507-1491-3360<br>
+                </p>
+
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>AllRight 프로젝트</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li><h3>조원소개</h3>
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀장: 여승재
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀원: 김경환, 이준혁, 정상훈, 최우진
+                    </li>
+                </ul>
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>프로젝트 소개</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li>
+                        다양한 주차장 정보, 주차 공유,
+
+                        스마트 주차 서비스까지 한번에!
+                    </li>
+                    <li>
+                        주차난을 완화하기 위한 프로젝트!
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="copyright">
+        <div class="container text-center fsize12">
+            Asad estate by  <a href="https://www.icia.co.kr/" target="_blank" title="bootstrap real estate  themes &amp; templates" class="copyright">@ICIA</a> •  &nbsp;
+            <a href="#" class="fsize11">Privacy Policy</a> •
+            <a href="#" class="fsize11">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+<!-- footer 끝-->
+
+<script src="js/app.js"></script>
+
+
+<!-- Bootstrap core and JavaScript's
+================================================== -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.parallax.js"></script>
+<script src="js/jquery.fitvids.js"></script>
+<script src="js/jquery.unveilEffects.js"></script>
+
+<script src="js/bootstrap-select.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/nicescroll.js"></script>
+<script src="js/main.js"></script>
+
+
+
+
+</body>
+
+<script>
+    /*
+     *	[1] session.loginId값을 스크립트에서 받아서
+     * 	[2] loginId가 존재하면
+     *  [3] alert창을 띄우고
+     *  [4] index 페이지로 이동한다!
+     */
+
+
+    // [1] session.loginId값을 스크립트에서 받아서
+    let loginId = '[[${session.loginId}]]';
+    console.log("loginId : " + loginId);
+
+    // [2] loginId가 존재하면
+    if(loginId!=""){
+
+        // [3] alert창을 띄우고
+        alert('현재 로그인 중입니다!');
+
+        // [4] index 페이지로 이동한다!
+        location.href="index";
+    }
+
+
+
+</script>
+</html>

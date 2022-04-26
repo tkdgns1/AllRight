@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>하루 지난 데이터 삭제 페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
+</head>
+<body>
+<table>
+    <caption>데이터 내역</caption>
+    <tr>
+        <th>번호</th>
+        <th>아이디</th>
+        <th>주차장이름</th>
+        <th>주차장주소</th>
+        <th>결제일</th>
+        <th>액션</th>
+    </tr>
+
+    <tr th:each="list : ${rdList}">
+        <td th:text="${list.rNo}"></td>
+        <td th:text="${list.rId}"></td>
+        <td th:text="${list.rPname}"></td>
+        <td th:text="${list.rPaddr}"></td>
+        <td th:text="${list.rDate}"></td>
+        <td><a th:if="${session.loginId eq 'admin'}" th:href="@{rdDelete(rNo=${list.rNo}, rPname=${list.rPname})}" th:text="삭제"></a></td>
+    </tr>
+</table>
+</body>
+</html>

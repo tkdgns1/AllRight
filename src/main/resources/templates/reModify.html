@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/table.css">
+</head>
+<body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap Real Estate Website Template">
+    <meta name="author" content="KimaroTec">
+
+    <title>리뷰 수정하기</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Ico font CSS -->
+    <link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="fonts/icofont/css/icofont.css" rel="stylesheet">
+    <link href="fonts/themify-icons/themify-icons.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!--    &lt;!&ndash; Google Fonts &ndash;&gt;
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,700,700italic,900' rel='stylesheet'
+              type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,300italic,400italic'
+              rel='stylesheet' type='text/css'>-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+<!-- /.preloader -->
+<!--<div id="preloader">
+    <div class="clear-loading loading-effect-3">
+        <div><span></span></div>
+    </div>
+    <h1>Loading</h1></div>-->
+<section class="top_bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="top_bar_info">
+                    <p><i class="fa fa-phone"></i>031-xxxx-xxxx</p>
+                    <p><i class="fa fa-envelope"></i>ICIA@co.kr</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right pl0">
+                <!--<div class="top_bar_social">
+                    <a class="fac" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="twi" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="goo" href="#"><i class="fa fa-google-plus"></i></a>
+                    <a class="lin" href="#"><i class="fa fa-linkedin"></i></a>
+                </div>-->
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right ">
+                <div class="langue-currency-menu ">
+                    <div class="dropdown">
+                        <a th:if="${session.loginId eq null}" onclick="location.href='JoinForm'">
+                            <button class="btn-dropdown dropdown-toggle" type="button"data-toggle="dropdown" aria-haspopup="true">
+                                회원가입</button></a>
+                        <a th:if="${session.loginId ne null}" th:text="${session.loginId}"></a>
+
+                    </div> <!-- End .dropdown -->
+                    <!-- 로그인을 하지 않았을 경우-->
+                    <div th:if="${session.loginId eq null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            로그인 <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="loginForm">로그인</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 로그인 했을 경우 -->
+                    <div th:if="${session.loginId ne null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            MyPage <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                            <li><a th:href="@{mqList(qId=${session.loginId})}">문의목록</a></li>
+                            <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                            <li><a onclick="location.href='mLogout'">로그아웃</a></li>
+                            <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                        </ul>
+                    </div>
+
+
+
+                    <!-- End .dropdown -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 상단바 바로 밑 부분 -->
+<div class="main_menu fixed_menu" id="menu">
+    <div class="container">
+        <div class="wrapper">
+
+            <!--로고 부분-->
+            <div class="header-logo">
+                <a href="index"><img src="img/parking.png" width="100" alt="logo" class="img-responsive"></a>
+            </div>
+            <!-- 로고 끝 -->
+
+            <div class="btn-cnt-mn">
+                <div class="dropdown profile-menu-settings" style="">
+
+                </div> <!-- End .dropdown -->
+                <!-- Menu ______________ -->
+            </div>
+            <!-- Menu ______________ -->
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> <!-- End .navbar-header -->
+
+                <!-- 상단바 로그인 하지 않았을 때-->
+                <div th:if="${session.loginId eq null}" class="collapse navbar-collapse" >
+                    <ul class="nav navbar-nav">
+
+                        <li class="sub-menu-holder dropdown"><a href="index">Home</a>
+                            <ul class="sub-menu">
+                                <li><a href="JoinForm">회원가입</a></li>
+                                <li><a href="loginForm">로그인</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="nList">공지사항</a></li>
+                        <li><a href="loginForm">마이페이지</a></li>
+                        <li><a href="loginForm">문의</a></li>
+                    </ul>
+                </div>
+
+                <!-- 상단바 로그인 했을 때-->
+                <div th:if="${session.loginId ne null}" class="collapse navbar-collapse" >
+                    <ul class="nav navbar-nav">
+
+                        <li class="sub-menu-holder dropdown"><a href="index">Home</a>
+                            <ul class="sub-menu">
+                                <li><a href="mLogout">로그아웃</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="pMap"> 주차장</a></li>
+
+                        <li class="sub-menu-holder dropdown"><a href="#">공지사항</a>
+                            <ul class="sub-menu">
+                                <li><a href="nList">공지사항</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aNwriteForm">공지사항 작성</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="sub-menu-holder dropdown"><a href="#">MyPage</a>
+                            <ul class="sub-menu">
+                                <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                                <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                                <li><a th:href="@{eList(eId=${session.loginId})}">주차완료리스트</a><li>
+                                <li><a th:href="@{revList(reId=${session.loginId})}">후기목록</a><li>
+                                <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu-holder dropdown"><a href="qForm">문의</a>
+                            <ul class="sub-menu">
+                                <li><a href="qForm">문의하기</a> </li>
+                                <li><a th:href="@{mqList(qId=${session.loginId})}">내문의목록</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu-holder dropdown"><a th:if="${session.loginId eq 'admin'}" href="#">관리자</a>
+                            <ul class="sub-menu">
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aMlist">회원관리</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aQlist">문의내역조회</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aPlist">주차장리스트</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aPaddForm">주차장 등록</a></li>
+                            </ul>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+
+
+
+
+                <!-- /.navbar-collapse -->
+            </nav>  <!-- End .navbar -->
+            <!-- End Menu __________ -->
+        </div>  <!-- End .wrapper -->
+    </div> <!-- End .container -->
+</div>
+
+<section class="generalwrapper dm-shadow clearfix">
+    <div class="container">
+        <form class="form-submit labels-uppercase MultiFile-intercepted" action="reModify" id="form-submit" method="POST" enctype="multipart/form-data">
+
+            <section id="main-information">
+                <div class="title">
+                    <h2>후기수정</h2>
+                </div>
+                <input type="hidden" name="reNo" th:value="${review.reNo}">
+                <input type="hidden" name="reId" th:value="${session.loginId}"/>
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <span class="step">1</span>  <label for="form-submit-title">제목<em>*</em></label>
+                            <input class="form-control" id="form-submit-title" name="reTitle" placeholder="제목을 입력하세요." required="" type="text" th:placeholder="${review.reTitle}">
+
+                        </div>
+                        <!--end form-group-->
+                        <div class="form-group">
+                            <span class="step">2</span>  <label for="form-submit-description">내용<em>*</em></label>
+                            <textarea class="form-control" id="form-submit-description" rows="10" name="reContent" required="" placeholder="내용을 입력하세요." th:placeholder="${review.reContent}"></textarea>
+                        </div>
+
+                        <!--end form-group-->
+                    </div>
+                    <!--end col-md-7-->
+
+                    <!--end col-md-5-->
+                </div>
+                <!--end row-->
+            </section>
+            <div class="form-group-inline row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h2><span class="step">3</span> 주차장 선택</h2>
+                        <select class="form-control" name="rePname" id="property_Status">
+                            <option value="">-- 선택 --</option>
+                            <option th:value="${review.rePname}" th:text="${review.rePname}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <section id="gallery">
+                <div class="title">
+                    <h2><span class="step">4</span> 첨부파일</h2>
+
+                </div>
+                <div class="file-upload-previews"></div>
+                <div class="file-upload">
+                    <div class="MultiFile-wrap" id="MultiFile1">
+                        <input id="MultiFile1_" name="reFile" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Click to add files" maxlength="10" accept="gif|jpg|png" type="file" th:src="@{/profile/{reFilename}(reFilename=${review.reFilename})}" >
+                    </div>
+
+                    <span>첨부할 이미지를 선택하세요.</span>
+                </div>
+            </section>
+            <br>
+            <section>
+                <div class="form-group center">
+                    <button type="submit" class="btn btn-primary btn-lg">작성</button>
+                </div>
+            </section>
+        </form>
+    </div>
+
+</section>
+
+</form>
+<!-- footer 부분-->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <!-- col #1 -->
+            <div class="logo_footer dark col-md-4">
+                <img alt="park" src="img/park1.png" class="footer-logo">
+                <p class="block">
+                    인천광역시 미추홀구 매소홀로 488번길 6-32 태승빌딩 5층<br>
+
+                    Email:icia@icia.com<br>
+                    Phone: 0507-1491-3360<br>
+                </p>
+
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>AllRight 프로젝트</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li><h3>조원소개</h3>
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀장: 여승재
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀원: 김경환, 이준혁, 정상훈, 최우진
+                    </li>
+                </ul>
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>프로젝트 소개</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li>
+                        다양한 주차장 정보, 주차 공유,
+
+                        스마트 주차 서비스까지 한번에!
+                    </li>
+                    <li>
+                        주차난을 완화하기 위한 프로젝트!
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="copyright">
+        <div class="container text-center fsize12">
+            Asad estate by  <a href="https://www.icia.co.kr/" target="_blank" title="bootstrap real estate  themes &amp; templates" class="copyright">@ICIA</a> •  &nbsp;
+            <a href="#" class="fsize11">Privacy Policy</a> •
+            <a href="#" class="fsize11">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- Bootstrap core and JavaScript's
+================================================== -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.parallax.js"></script>
+<script src="js/jquery.fitvids.js"></script>
+<script src="js/jquery.unveilEffects.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/nicescroll.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Googgle map
+================================================== -->
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="js/infobox.js"></script><!-- Parallax -->
+<script src="js/data.json"></script>
+<script src="js/markerclusterer.js"></script>
+<script src="js/markers-map.js"></script>
+
+
+
+</body>
+</html>

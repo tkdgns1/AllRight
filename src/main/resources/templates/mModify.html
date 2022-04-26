@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
+
+    <title>Sign Up | AdminKit Demo</title>
+
+    <link href="css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<main class="d-flex w-100">
+    <div class="container d-flex flex-column">
+        <div class="row vh-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
+
+                    <div class="text-center mt-4">
+                        <h1 class="h2">회원정보수정</h1>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                <form action="mModify" method="POST" enctype="multipart/form-data" name="modiForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">아이디 </label>
+                                        <input type="hidden" name="mId" th:text="${member.mId}" th:value="${member.mId}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">비밀번호</label>
+                                        <input class="form-control form-control-lg"  type="password" name="mPw" id="mPw" onkeyup="pwRegExp()" ><span id="pwRegExp"></span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">비밀번호확인</label>
+                                        <input class="form-control form-control-lg"  type="password" id="checkPw" onkeyup="pwOverlap()" ><span id="confirmPw"></span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">이름</label>
+                                        <input class="form-control form-control-lg"  type="hidden" name="mName" th:text="${member.mName}" th:value="${member.mName}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">생년월일</label>
+                                        <input type="hidden" name="mBirth" th:text="${member.mBirth}" th:value="${member.mBirth}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">면허증</label>
+                                        <input class="form-control form-control-lg" type="file" name="mLicence" />
+                                    </div>
+                                    <tr class="mobileNo">
+                                        <th>
+                                            <label for="phone">휴대폰 번호</label>
+                                        </th>
+                                        <td>
+                                            <p>
+                                                <input id="phone" type="text" name="mPhone" class="form-control form-control-lg" placeholder="전화번호 입력" title="전화번호 입력" required/>
+                                                <span id="phoneChk" class="doubleChk" ><input type="button" value="인증번호보내기" class="btn btn-lg btn-primary"></span><br/>
+
+                                                <input id="phone2" type="text" name="phone2" class="form-control form-control-lg" placeholder="인증번호 입력" title="인증번호 입력" disabled required/>
+                                                <span id="phoneChk2" class="doubleChk"><input type="button" value="본인인증" class="btn btn-lg btn-primary"></span>
+                                                <span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
+
+                                                <input type="hidden" id="phoneDoubleChk"/>
+                                            </p>
+                                            <p class="tip">
+                                                최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.)
+                                            </p>
+                                        </td>
+
+                                        <div class="text-center mt-3">
+                                            <!-- <a href="index1.html" class="btn btn-lg btn-primary">Sign up</a>-->
+                                            <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+                                            <input type="button" class="btn btn-primary" onclick="mmodi()" value="수정">
+                                            <input type="reset" class="btn btn-primary" value="초기화">
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<script src="js/app.js"></script>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    //아이디 중복체크
+    function idOverlap(){
+        let idCheck = document.getElementById("mId").value;
+        let confirmId = document.getElementById("confirmId");
+        let idPass = false;
+
+        $.ajax({
+            type : "POST" ,
+            url : "idOverlap" ,
+            data : { "mId" : idCheck } ,
+            async : false,
+            dataType : "text" ,
+            success :  function(data){
+                // 성공시
+                if(data=="OK"){
+                    confirmId.style.color="#0000ff";
+                    confirmId.innerHTML = "사용 가능한 아이디";
+                    idPass = true;
+                } else {
+                    confirmId.style.color="#ff0000";
+                    confirmId.innerHTML = "사용 불가능한 아이디";
+                    idPass = false;
+                }
+            } ,
+            error : function(){
+                // 실패시
+                alert("idOverlap함수 통신실패!");
+            }
+        });
+        return idPass;
+    }
+
+    // 비밀번호 정규식
+    function pwRegExp(){
+        let mPw = document.getElementById("mPw").value;
+        let pwRegExp = document.getElementById("pwRegExp");
+        let pwPass = false;
+
+        let num = mPw.search(/[0-9]/g);
+        let eng = mPw.search(/[a-z]/ig);
+        let spe = mPw.search(/[`~!@#$%^&*|\\\'\";:\/?]/gi);
+
+        /// 1234 567!q
+        if(mPw.length < 8 || mPw.length > 15){
+            pwRegExp.style.color="#ff0000";
+            pwRegExp.innerHTML = "8자리 ~ 15자리 이내로 입력해주세요!";
+
+
+        } else if(mPw.search(/\s/) != -1) {
+            pwRegExp.style.color="#ff0000";
+            pwRegExp.innerHTML = "비밀번호는 공백 없이 입력해주세요!";
+        } else if(num < 0 || eng < 0 || spe < 0){
+            pwRegExp.style.color="#ff0000";
+            pwRegExp.innerHTML = "영문, 숫자, 특수문자를 혼합하여 입력해주세요!";
+        } else {
+            pwRegExp.style.color="#0000ff";
+            pwRegExp.innerHTML = "적절한 비밀번호 입니다!";
+            pwPass = true;
+        }
+        return pwPass;
+    }
+
+    // 비밀번호 일치여부 확인
+    function pwOverlap(){
+        let mPw = document.getElementById("mPw").value;
+        let pwRegExp = document.getElementById("pwRegExp");
+
+        let checkPw = document.getElementById("checkPw").value;
+        let confirmPw = document.getElementById("confirmPw");
+
+        let pwPass =false;
+
+        pwRegExp.innerHTML = "";
+
+        if(mPw==checkPw){
+            confirmPw.style.color = "#0000ff";
+            confirmPw.innerHTML = "비밀번호가 일치합니다!";
+            pwPass = true;
+
+        } else {
+            confirmPw.style.color = "#ff0000";
+            confirmPw.innerHTML = "비밀번호를 확인해주세요!";
+        }
+        return pwPass;
+    }
+
+
+
+    var code2 = "";
+    $("#phoneChk").click(function (){
+        alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+        var phone = $("#phone").val();
+        $.ajax({
+            type:"GET",
+            url:"phoneCheck?phone=" + phone,
+            cache : false,
+            success:function(data){
+                if(data == "error"){
+                    alert("휴대폰 번호가 올바르지 않습니다.")
+                    $(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+                    $(".successPhoneChk").css("color","red");
+                    $("#phone").attr("autofocus",true);
+                }else{
+                    $("#phone2").attr("disabled",false);
+                    $("#phoneChk2").css("display","inline-block");
+                    $(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+                    $(".successPhoneChk").css("color","green");
+                    $("#phone").attr("readonly,true");
+                    code2 = data;
+                }
+            }
+        });
+    });
+
+    let pcheck = false;
+
+    // 휴대폰 인증번호 대조
+    $("#phoneChk2").click(function (){
+        console.log("phoneChk2 실행확인!!");
+        console.log($("#phone2").val());
+        console.log(code2);
+        if($("#phone2").val() == code2){
+            $(".successPhoneChk").text("인증번호가 일치합니다.");
+            $(".successPhoneChk").css("color", "green");
+            $("#phoneDoubleChk").val("true");
+            $("#phone2").attr("disabled",true);
+            pcheck = true;
+        }else{
+            $(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+            $(".successPhoneChk").css("color","red");
+            $("#phoneDoubleChk").val("false");
+            $(this).attr("autofocus",true);
+        }
+    });
+
+    // 회원가입 버튼
+    function mmodi() {
+        console.log("비밀번호 체크1 : " + pwRegExp());
+        console.log("비밀번호 체크2 : " + pwOverlap());
+        console.log("휴대폰 인증번호 체크 : " + pcheck);
+
+        if(!pwRegExp()) {
+            alert("비밀번호 규칙에 맞게 입력해주세요.");
+        } else if(!pwOverlap()) {
+            alert("비밀번호가 일치하지 않습니다.");
+        } else if(pcheck==false) {
+            alert("휴대폰 인증번호가 일치하지 않습니다.");
+        } else {
+            modiForm.submit();
+        }
+    }
+</script>
+
+
+</html>

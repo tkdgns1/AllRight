@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icia.allright.dao.PDAO">
+
+    <select id="pList" resultType="parkinglot">
+        SELECT * FROM PARKINGLOT
+    </select>
+
+    <select id="pView" parameterType="String" resultType="parkinglot">
+        SELECT * FROM PARKINGLOT WHERE PCODE=#{pCode}
+    </select>
+
+    <insert id="pFavorite" parameterType="favorite">
+        INSERT INTO FAVORITE VALUES(FNO_SEQ.NEXTVAL, #{fId}, #{fPcode}, #{fPname} , #{fPaddr})
+    </insert>
+
+    <select id="pView2" parameterType="String" resultType="parkinglot">
+        SELECT * FROM PARKINGLOT WHERE PNAME=#{pName}
+    </select>
+</mapper>

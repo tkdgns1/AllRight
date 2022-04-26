@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icia.allright.dao.ADAO">
+
+    <insert id="pAdd" parameterType="parkinglot">
+        INSERT INTO PARKINGLOT VALUES(#{pCode}, #{pName}, #{pAddr}, #{pLa}, #{pLo}, #{pTotal}, #{pAvail}, #{pPrice}, #{pTime})
+    </insert>
+
+    <insert id="nWrite" parameterType="anotice">
+        INSERT INTO ANOTICE VALUES( ANNO_SEQ.NEXTVAL, #{nTitle}, #{nContent},  #{nFileName})
+    </insert>
+
+    <select id="nList" resultType="anotice">
+        SELECT * FROM ANOTICE
+    </select>
+
+    <select id="nView" parameterType="int" resultType="anotice">
+        SELECT * FROM ANOTICE WHERE NNO=#{nNo}
+    </select>
+
+    <update id="nModify" parameterType="anotice">
+        UPDATE ANOTICE SET NTITLE=#{nTitle}, NCONTENT=#{nContent}, NFILENAME=#{nFileName} WHERE NNO=#{nNo}
+    </update>
+
+    <delete id="nDelete" parameterType="int">
+        DELETE FROM ANOTICE WHERE NNO=#{nNo}
+    </delete>
+
+    <select id="aQlist" resultType="question">
+        SELECT * FROM AQUESTION
+    </select>
+
+    <select id="cList" parameterType="int" resultType="qcomment">
+        SELECT * FROM QCOMMENT WHERE QCBNO=#{qCbno} ORDER BY QCNO ASC
+    </select>
+
+    <insert id="cWrite" parameterType="qcomment">
+        INSERT INTO QCOMMENT VALUES(QCNO_SEQ.NEXTVAL, #{qCbno}, #{qCwriter}, #{qCcontent})
+    </insert>
+
+    <delete id="cDelete" parameterType="qcomment">
+        DELETE FROM QCOMMENT WHERE QCNO=#{qCno}
+    </delete>
+
+    <select id="aPlist" resultType="parkinglot">
+        SELECT * FROM PARKINGLOT
+    </select>
+
+    <select id="aPdata" resultType="RESERVE">
+        SELECT * FROM RESERVE WHERE (SYSDATE - RDATE) <![CDATA[ > ]]> 1
+    </select>
+
+    <delete id="rdDelete" parameterType="int">
+        DELETE FROM RESERVE WHERE RNO=#{rNo}
+    </delete>
+
+    <update id="plus" parameterType="String">
+        UPDATE PARKINGLOT SET PAVAIL=PAVAIL+1 WHERE PNAME=#{rPname}
+    </update>
+
+    <select id="aMlist" resultType="member">
+        SELECT * FROM AMEMBER
+    </select>
+
+    <insert id="rmove" parameterType="expiration">
+        INSERT INTO EXPIRATION VALUES(#{eNo},#{eId}, #{ePcode}, #{ePname}, #{ePaddr} , #{ePrice}, #{eDate})
+    </insert>
+</mapper>

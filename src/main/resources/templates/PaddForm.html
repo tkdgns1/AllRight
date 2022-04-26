@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap Real Estate Website Template">
+    <meta name="author" content="KimaroTec">
+
+    <title>ASAD ESTATE | Real Estate bootstrap Website Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Ico font CSS -->
+    <link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="fonts/icofont/css/icofont.css" rel="stylesheet">
+    <link href="fonts/themify-icons/themify-icons.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,300italic,400italic' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+<!-- 맨위 상단바 -->
+<section class="top_bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="top_bar_info">
+                    <p><i class="fa fa-phone"></i>031-xxxx-xxxx</p>
+                    <p><i class="fa fa-envelope"></i>ICIA@co.kr</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right pl0">
+                <!--<div class="top_bar_social">
+                    <a class="fac" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="twi" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="goo" href="#"><i class="fa fa-google-plus"></i></a>
+                    <a class="lin" href="#"><i class="fa fa-linkedin"></i></a>
+                </div>-->
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right ">
+                <div class="langue-currency-menu ">
+                    <div class="dropdown">
+                        <a th:if="${session.loginId eq null}" onclick="location.href='JoinForm'">
+                            <button class="btn-dropdown dropdown-toggle" type="button"data-toggle="dropdown" aria-haspopup="true">
+                                회원가입</button></a>
+                        <a th:if="${session.loginId ne null}" th:text="${session.loginId}"></a>
+
+                    </div> <!-- End .dropdown -->
+                    <!-- 로그인을 하지 않았을 경우-->
+                    <div th:if="${session.loginId eq null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            로그인 <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="loginForm">로그인</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 로그인 했을 경우 -->
+                    <div th:if="${session.loginId ne null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            MyPage <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                            <li><a th:href="@{mqList(qId=${session.loginId})}">문의목록</a></li>
+                            <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                            <li><a onclick="location.href='mLogout'">로그아웃</a></li>
+                            <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                        </ul>
+                    </div>
+
+
+
+                    <!-- End .dropdown -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 상단바 바로 밑 부분 -->
+<div class="main_menu fixed_menu" id="menu">
+    <div class="container">
+        <div class="wrapper">
+
+            <!--로고 부분-->
+            <div class="header-logo">
+                <a href="index"><img src="img/parking.png" width="100" alt="logo" class="img-responsive"></a>
+            </div>
+            <!-- 로고 끝 -->
+
+            <div class="btn-cnt-mn">
+                <div class="dropdown profile-menu-settings" style="">
+
+                </div> <!-- End .dropdown -->
+                <!-- Menu ______________ -->
+            </div>
+            <!-- Menu ______________ -->
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> <!-- End .navbar-header -->
+
+                <!-- 상단바 로그인 하지 않았을 때-->
+                <div th:if="${session.loginId eq null}" class="collapse navbar-collapse" >
+                    <ul class="nav navbar-nav">
+
+                        <li class="sub-menu-holder dropdown"><a href="index">Home</a>
+                            <ul class="sub-menu">
+                                <li><a href="JoinForm">회원가입</a></li>
+                                <li><a href="loginForm">로그인</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="nList">공지사항</a></li>
+                        <li><a href="loginForm">마이페이지</a></li>
+                        <li><a href="loginForm">문의</a></li>
+                    </ul>
+                </div>
+
+                <!-- 상단바 로그인 했을 때-->
+                <div th:if="${session.loginId ne null}" class="collapse navbar-collapse" >
+                    <ul class="nav navbar-nav">
+
+                        <li class="sub-menu-holder dropdown"><a href="index">Home</a>
+                            <ul class="sub-menu">
+                                <li><a href="mLogout">로그아웃</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="pMap"> 주차장</a></li>
+
+                        <li class="sub-menu-holder dropdown"><a href="#">공지사항</a>
+                            <ul class="sub-menu">
+                                <li><a href="nList">공지사항</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aNwriteForm">공지사항 작성</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="sub-menu-holder dropdown"><a href="#">MyPage</a>
+                            <ul class="sub-menu">
+                                <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                                <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                                <li><a th:href="@{eList(eId=${session.loginId})}">주차완료리스트</a><li>
+                                <li><a th:href="@{revList(reId=${session.loginId})}">후기목록</a><li>
+                                <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu-holder dropdown"><a href="qForm">문의</a>
+                            <ul class="sub-menu">
+                                <li><a href="qForm">문의하기</a> </li>
+                                <li><a th:href="@{mqList(qId=${session.loginId})}">내문의목록</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu-holder dropdown"><a th:if="${session.loginId eq 'admin'}" href="#">관리자</a>
+                            <ul class="sub-menu">
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aMlist">회원관리</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aQlist">문의내역조회</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aPlist">주차장리스트</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aPaddForm">주차장 등록</a></li>
+                            </ul>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+
+
+
+
+                <!-- /.navbar-collapse -->
+            </nav>  <!-- End .navbar -->
+            <!-- End Menu __________ -->
+        </div>  <!-- End .wrapper -->
+    </div> <!-- End .container -->
+</div>
+
+<!-- 중앙위 배너 -->
+<section id="one-parallax" class="post-wrapper-top dm-shadow clearfix parallax" style="background-image: url('img/skyblue.png');" data-stellar-background-ratio="0.6" data-stellar-vertical-offset="20">
+    <div class="overlay1 dm-shadow">
+        <div class="container">
+            <div class="post-wrapper-top-shadow">
+                <span class="s1"></span>
+            </div>
+            <div class="col-lg-12">
+
+                <h2>주차장 목록</h2>
+            </div>
+        </div>
+    </div>
+</section><!-- end post-wrapper-top -->
+<!-- 중앙위 배너 끝-->
+
+<section class="generalwrapper dm-shadow clearfix">
+    <div class="container">
+        <div class="row">
+
+
+            <div id="content" class="col-lg-9 col-md-9 col-xs-12 clearfix">
+
+                <div class="agent_boxes boxes clearfix">
+                    <div class="agent_details clearfix">
+                        <div class="col-lg-7 col-md-7 col-sm-12">
+                            <div id="map" style="width:100%;height:350px;"></div>
+                            <p><em>지도를 클릭해주세요!</em></p>
+                        </div><!-- end col-lg-7 -->
+
+                        <div class="col-lg-5 col-md-5 col-sm-12">
+                            <h3 class="big_title">주차장 등록<small>조건에 맞취 입력해주세요.</small></h3>
+                            <form action="pAdd" id="agent_form" method="POST" enctype="multipart/form-data">
+                                <input type="text" class="form-control" name="pCode" placeholder="주차장 코드를 입력해주세요.">
+                                <input type="text" class="form-control" name="pName" placeholder="주차장 이름을 입력해주세요.">
+                                <input type="text" class="form-control" id="sample6_postcode" name="addr1" placeholder="우편번호를 입력해주세요">
+                                <input type="button" class="btn btn-group" onclick="sample6_execDaumPostcode()" value="우편번호 입력">
+                                <input type="text" class="form-control" id="sample6_address" name="addr2" placeholder="주소" onclick="search()">
+                                <input type="text" class="form-control" id="sample6_detailAddress" name="addr3" placeholder="상세 주소">
+
+                                <input type="float" class="form-control" id="valueInput1" name="pLa" placeholder="위도">
+                                <input type="float" class="form-control" id="valueInput2" name="pLo" placeholder="경도">
+                                <input type="number" class="form-control" name="pTotal" placeholder="총 주차 칸수를 입력새주세요.">
+                                <input type="number" class="form-control" name="pAvail" placeholder="사용 가능한 주차 칸 수를 입력해주세요.">
+                                <input type="text" class="form-control" name="pPrice" placeholder="주차장 가격을 입력해주세요.">
+                                <input type="text" class="form-control" name="pTime" placeholder="운영 시간을 입력해주세요.">
+                                <input type="submit" class="btn btn-primary" value="작성">
+
+                            </form><!-- end search form -->
+                        </div><!-- end col-lg-6 -->
+                    </div><!-- end agent_details -->
+                </div><!-- end agent_boxes -->
+
+
+
+            </div><!-- end content -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end generalwrapper -->
+
+<!-- footer 윗부분-->
+<div class="callout dark"><!-- add "styleBackgroundColor" class for colored background and white text OR "dark" for a dark callout -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9"><!-- title + shortdesc -->
+
+                <p>ICIA <strong>Allright</strong> for free!</p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <!-- col #1 -->
+            <div class="logo_footer dark col-md-4">
+                <img alt="park" src="img/park1.png" class="footer-logo">
+                <p class="block">
+                    인천광역시 미추홀구 매소홀로 488번길 6-32 태승빌딩 5층<br>
+
+                    Email:icia@icia.com<br>
+                    Phone: 0507-1491-3360<br>
+                </p>
+
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>AllRight 프로젝트</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li><h3>조원소개</h3>
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀장: 여승재
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀원: 김경환, 이준혁, 정상훈, 최우진
+                    </li>
+                </ul>
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>프로젝트 소개</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li>
+                        다양한 주차장 정보, 주차 공유,
+
+                        스마트 주차 서비스까지 한번에!
+                    </li>
+                    <li>
+                        주차난을 완화하기 위한 프로젝트!
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="copyright">
+        <div class="container text-center fsize12">
+            Asad estate by  <a href="https://www.icia.co.kr/" target="_blank" title="bootstrap real estate  themes &amp; templates" class="copyright">@ICIA</a> •  &nbsp;
+            <a href="#" class="fsize11">Privacy Policy</a> •
+            <a href="#" class="fsize11">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+<!-- footer 끝-->
+
+<!-- Bootstrap core and JavaScript's
+================================================== -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.parallax.js"></script>
+<script src="js/jquery.fitvids.js"></script>
+<script src="js/jquery.unveilEffects.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/nicescroll.js"></script>
+<script src="js/main.js"></script>
+
+<!-- FlexSlider JavaScript
+================================================== -->
+<script src="js/jquery.flexslider.js"></script>
+<script>
+    $(window).load(function () {
+        $('#carousel').flexslider({
+            animation: "slide",
+            controlNav: true,
+            directionNav: false,
+            animationLoop: true,
+            slideshow: true,
+            itemWidth: 114,
+            itemMargin: 0,
+            asNavFor: '#slider'
+        });
+
+        $('#slider').flexslider({
+            animation: "fade",
+            controlNav: false,
+            animationLoop: false,
+            slideshow: true,
+            sync: "#carousel"
+        });
+
+        $('#property-slider .flexslider').flexslider({
+            animation: "fade",
+            slideshowSpeed: 6000,
+            animationSpeed: 1300,
+            directionNav: true,
+            controlNav: false,
+            keyboardNav: true
+        });
+    });
+</script>
+
+</body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b92bb011c2b44737de3b14efdbced964&libraries=services"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+                search();
+            }
+        }).open();
+    }
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+    function search() {
+
+
+        let addr = document.getElementById("sample6_address").value;
+        console.log(addr);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(addr, function (result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+
+                console.log(coords.getLat());
+                console.log(coords.getLng());
+
+                let valueInput1 = document.getElementById("valueInput1");
+                valueInput1.value = coords.getLat();
+                let valueInput2 = document.getElementById("valueInput2");
+                valueInput2.value = coords.getLng();
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        });
+    }
+</script>
+</html>

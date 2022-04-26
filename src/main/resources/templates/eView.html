@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap Real Estate Website Template">
+    <meta name="author" content="KimaroTec">
+
+    <title>ASAD ESTATE | Real Estate bootstrap Website Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Ico font CSS -->
+    <link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="fonts/icofont/css/icofont.css" rel="stylesheet">
+    <link href="fonts/themify-icons/themify-icons.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,300italic,400italic' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+<!-- /.preloader -->
+<div id="preloader">
+    <div class="clear-loading loading-effect-3">
+        <div><span></span></div>
+    </div>
+    <h1>Loading</h1>
+</div>
+<div id="top"></div>
+
+<!-- 맨위 상단바 -->
+<section class="top_bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="top_bar_info">
+                    <p><i class="fa fa-phone"></i>031-xxxx-xxxx</p>
+                    <p><i class="fa fa-envelope"></i>ICIA@co.kr</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right pl0">
+                <!--<div class="top_bar_social">
+                    <a class="fac" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="twi" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="goo" href="#"><i class="fa fa-google-plus"></i></a>
+                    <a class="lin" href="#"><i class="fa fa-linkedin"></i></a>
+                </div>-->
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-xs-12 pull-right top-asad-right ">
+                <div class="langue-currency-menu ">
+                    <div class="dropdown">
+                        <a th:if="${session.loginId eq null}" onclick="location.href='JoinForm'">
+                            <button class="btn-dropdown dropdown-toggle" type="button"data-toggle="dropdown" aria-haspopup="true">
+                                회원가입</button></a>
+                        <a th:if="${session.loginId ne null}" th:text="${session.loginId}"></a>
+
+                    </div> <!-- End .dropdown -->
+                    <!-- 로그인을 하지 않았을 경우-->
+                    <div th:if="${session.loginId eq null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            로그인 <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="loginForm">로그인</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 로그인 했을 경우 -->
+                    <div th:if="${session.loginId ne null}" class="dropdown">
+                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            MyPage <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                            <li><a th:href="@{mqList(qId=${session.loginId})}">문의목록</a></li>
+                            <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                            <li><a onclick="location.href='mLogout'">로그아웃</a></li>
+                            <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                        </ul>
+                    </div>
+
+
+
+                    <!-- End .dropdown -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- 맨위 상단바 끝-->
+
+
+<!-- 상단바 바로 밑 부분 -->
+<div class="main_menu fixed_menu" id="menu">
+    <div class="container">
+        <div class="wrapper">
+
+            <!--로고 부분-->
+            <div class="header-logo">
+                <a href="index"><img src="img/parking.png" width="100" alt="logo" class="img-responsive"></a>
+            </div>
+            <!-- 로고 끝 -->
+
+            <div class="btn-cnt-mn">
+                <div class="dropdown profile-menu-settings" style="">
+
+                </div> <!-- End .dropdown -->
+                <!-- Menu ______________ -->
+            </div>
+            <!-- Menu ______________ -->
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> <!-- End .navbar-header -->
+
+                <!-- 상단바 로그인 하지 않았을 때-->
+                <div th:if="${session.loginId eq null}" class="collapse navbar-collapse" >
+                    <ul class="nav navbar-nav">
+
+                        <li class="sub-menu-holder dropdown"><a href="index">Home</a>
+                            <ul class="sub-menu">
+                                <li><a href="JoinForm">회원가입</a></li>
+                                <li><a href="loginForm">로그인</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="nList">공지사항</a></li>
+                        <li><a href="loginForm">마이페이지</a></li>
+                        <li><a href="loginForm">문의</a></li>
+                    </ul>
+                </div>
+
+                <!-- 상단바 로그인 했을 때-->
+                <div th:if="${session.loginId ne null}" class="collapse navbar-collapse" >
+                    <ul class="nav navbar-nav">
+
+                        <li class="sub-menu-holder dropdown"><a href="index">Home</a>
+                            <ul class="sub-menu">
+                                <li><a href="mLogout">로그아웃</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="pMap"> 주차장</a></li>
+
+                        <li class="sub-menu-holder dropdown"><a href="#">공지사항</a>
+                            <ul class="sub-menu">
+                                <li><a href="nList">공지사항</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aNwriteForm">공지사항 작성</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="sub-menu-holder dropdown"><a href="#">MyPage</a>
+                            <ul class="sub-menu">
+                                <li><a th:href="@{mView(mId=${session.loginId})}">내정보</a></li>
+                                <li><a th:href="@{rList(rId=${session.loginId})}">결제내역</a></li>
+                                <li><a th:href="@{eList(eId=${session.loginId})}">주차완료리스트</a><li>
+                                <li><a th:href="@{revList(reId=${session.loginId})}">후기목록</a><li>
+                                <li><a th:href="@{mfList(fId=${session.loginId})}">즐겨찾기</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu-holder dropdown"><a href="qForm">문의</a>
+                            <ul class="sub-menu">
+                                <li><a href="qForm">문의하기</a> </li>
+                                <li><a th:href="@{mqList(qId=${session.loginId})}">내문의목록</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu-holder dropdown"><a th:if="${session.loginId eq 'admin'}" href="#">관리자</a>
+                            <ul class="sub-menu">
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aMlist">회원관리</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aQlist">문의내역조회</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aPlist">주차장리스트</a></li>
+                                <li><a th:if="${session.loginId eq 'admin'}" href="aPaddForm">주차장 등록</a></li>
+                            </ul>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+
+
+
+
+                <!-- /.navbar-collapse -->
+            </nav>  <!-- End .navbar -->
+            <!-- End Menu __________ -->
+        </div>  <!-- End .wrapper -->
+    </div> <!-- End .container -->
+</div>
+
+<!-- 중앙위 배너 -->
+<section id="one-parallax" class="post-wrapper-top dm-shadow clearfix parallax" style="background-image: url('img/skyblue.png');" data-stellar-background-ratio="0.6" data-stellar-vertical-offset="20">
+    <div class="overlay1 dm-shadow">
+        <div class="container">
+            <div class="post-wrapper-top-shadow">
+                <span class="s1"></span>
+            </div>
+            <div class="col-lg-12">
+
+                <h2>AllRight Parking</h2>
+            </div>
+        </div>
+    </div>
+</section><!-- end post-wrapper-top -->
+<!-- 중앙위 배너 끝-->
+
+
+<section class="generalwrapper dm-shadow clearfix">
+    <div class="container">
+        <div class="row">
+
+            <!--왼쪽 바-->
+            <!--<div id="right_sidebar" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 last clearfix">
+                <div class="widget">
+                    <ul class="pro-info_widget">
+                        <li class="nav-item">
+                            <a href="#" class="">
+                                <img class="img-responsive img-thumbnail width-100-100" src="img/demo/team_2.jpg" alt="">
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+                        <li class="nav-item">
+                            <a href="profile.html" class="nav-link">
+                                <i class="fa fa-heart"></i> My Profile
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+                        <li class="nav-item">
+                            <a href="my-properties.html" class="nav-link">
+                                <i class="icofont icofont-listine-dots"></i> My properties
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+                        <li class="nav-item">
+                            <a href="submit.html" class="nav-link">
+                                <i class="icofont icofont-ui-home"></i> Add property
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+                        <li class="nav-item">
+                            <a href="favorites-list.html" class="">
+                                <i class="icofont icofont-heart"></i> Favorites list
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+                        <li class="nav-item">
+                            <a href="compare-list.html" class="">
+                                <i class="fa fa-balance-scale"></i> Compare list
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+
+                        <li class="nav-item">
+                            <a href="login.html" class="nav-link">
+                                <i class="icofont icofont-logout"></i> Log-out
+                            </a>
+                        </li>&lt;!&ndash; /.nav-item &ndash;&gt;
+
+
+                    </ul>&lt;!&ndash; /.nav-style-primary &ndash;&gt;
+                </div>
+                &lt;!&ndash; agent details &ndash;&gt;
+
+                &lt;!&ndash;Your Current Package  &ndash;&gt;
+                <div class="widget sidebar_agent clearfix">
+                    <div class="title">
+                        <h3>Your Current Package</h3>
+                    </div>
+                    <div class="package-content boxes">
+                        <p><strong>Free Membership</strong></p>
+                        <p>Listing included:&nbsp;3</p>
+                        <p>Listing remain:&nbsp;1</p>
+                        <p>Featured included:&nbsp;1</p>
+                        <p>Featured remain:&nbsp;1</p>
+                        <p>Ends On:&nbsp;Never</p>
+                    </div>
+                </div>
+                &lt;!&ndash; Change Your Plan &ndash;&gt;
+                <div class="widget sidebar_agent clearfix">
+                    <div class="title">
+                        <h3>Change Your Plan</h3>
+                    </div>
+                    <div class="plan-content boxes">
+                        <form class="subscription_post">
+                            <div class="form-message">
+                            </div>
+                            <div class="form-group">
+                                <div class="dropdown label-select">
+                                    <select class="form-control">
+                                        <option>Plus Plan</option>
+                                        <option>Premium Plan</option>
+                                        <option>Basic Plan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recurring_payment" class="checkbox-label">
+                                    <input id="recurring_payment" name="recurring_payment" value="1" type="checkbox">
+                                    Make Payment Recurring
+                                </label>
+                            </div>
+                            <div class="">
+                                <input class="btn btn-success" value="PAY WITH PAYPAL" type="submit">
+                            </div>
+                            <div class="package-info">
+                                or&nbsp;
+                                <a href="#">View more detail</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>--><!-- end sidebar -->
+
+            <!-- 중앙 -->
+            <div id="content" class="col-lg-12 col-md-12 col-sm-10 col-xs-12 clearfix">
+                <div class="submit-content">
+                    <form id="profile_form" name="profile_form" class="form profile-form">
+                        <div class="control-group">
+                            <div class="group-title">내 주차정보</div>
+                            <div class="group-container row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group s-profile-title">
+                                                <label>번호&nbsp;*</label><br>
+                                                <td th:text="${expiration.eNo}"></td>
+                                            </div>
+                                            <div class="form-group s-profile-position">
+                                                <label>아이디&nbsp;*</label><br>
+                                                <td th:text="${expiration.eId}"></td>
+                                            </div>
+                                            <div class="form-group s-profile-email">
+                                                <label>주차장 코드&nbsp;*</label><br>
+                                                <td th:text="${expiration.ePcode}"></td>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group s-profile-email">
+                                                <label>주차장 이름&nbsp;*</label><br>
+                                                <td th:text="${expiration.ePname}"></td>
+                                            </div>
+                                            <div class="form-group s-profile-email">
+                                                <label>주차장 주소&nbsp;*</label><br>
+                                                <td th:text="${expiration.ePaddr}"></td>
+                                            </div>
+                                            <div class="form-group s-profile-email">
+                                                <label>주차장가격&nbsp;*</label><br>
+                                                <td th:text="${expiration.ePrice}"></td>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <tr th:if="${session.loginId ne null}">
+                                                <td colspan="2">
+                                                    <a onclick="location.href='index'" class="btn btn-primary btn-lg">홈으로</a>
+                                                    <!--
+                                                                    <a th:href="@{rDelete(rNo=${reserve.rNo},rId=${reserve.rId})}"></a>
+                                                    -->
+                                                </td>
+                                            </tr>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-12">
+                                <label for="desc">About me</label>
+                                <textarea id="desc" class="form-control" name="desc" rows="8">Kimaro kyoto He did this without coming from another Manhattan firm. The instinct that drove him to form Elegran was a strong vision and passion to create a workplace atmosphere of generosity and teamwork. Similarly, he committed himself to a basis where the people would be more important than the company's bottom line. His penchant for providing exceptional service to his clients coupled with a cutting-edge knowledge of the industry has provided Elegran's agents with a strong foundation to succeed in their own goals of making clients' real estate dreams into reality. Moreover, Doe realized that there was a real demand for a non-pressured, honest atmosphere where agents could thrive without the everyday workplace politics. Doe also envisioned a workplace in which people would feel at home, clients' interests would be put first and innovative strategies using technology would be utilized in servicing clients' and agents' needs. We believe that this ongoing mission combined with a commitment to industry ethics, selflessness and our select team of knowledgeable agents can change the real estate industry for the better. Prior to Elegran, Doe gained his industry experience in wholesale mortgage banking. He quickly rose to the top of his field at the age of 27, producing in the top 1% industrywide. Close to his exit from that field, Doe was known for implementing new underwriting methods, which brought his team to be the most profitable in the Northeast. Today, Doe and the Elegran team have made their mark; they have earned a respectable presence in the most competitive Real Estate market in the world. His team has experienced exponential growth from the formative days, and they continue to succeed. Agents who work at Elegran continually boast about the office and our "family" atmosphere. Residing for over a decade in the NYC area and a native of Williamsville, New York, Doe went to college in upstate New York, the University of Hawaii and The London School of Economics, majoring in both Business and Economics. Doe spends most of his free time with his family and enjoys reading, travel, music and sporting events.</textarea>
+                            </div>-->
+                        </div>
+                </div>
+
+
+
+                <!--<div class="control-group">
+                    <div class="group-title">Social Network</div>
+                    <div class="group-container row">
+                        <div class="clearfix">
+                            <div class="col-md-6">
+                                <div class="form-group s-profile-facebook">
+                                    <label for="facebook">Facebook Url</label>
+                                    <input id="facebook" class="form-control" value="#" name="facebook" type="text">
+                                </div>
+                                <div class="form-group s-profile-twitter">
+                                    <label for="twitter">Twitter Url</label>
+                                    <input id="twitter" class="form-control" value="#" name="twitter" type="text">
+                                </div>
+                                <div class="form-group s-profile-google_plus">
+                                    <label for="google_plus">Google Plus Url</label>
+                                    <input id="google_plus" class="form-control" value="#" name="google_plus" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group s-profile-linkedin">
+                                    <label for="linkedin">LinkedIn Url</label>
+                                    <input id="linkedin" class="form-control" value="#" name="linkedin" type="text">
+                                </div>
+                                <div class="form-group s-profile-pinterest">
+                                    <label for="pinterest">Pinterest Url</label>
+                                    <input id="pinterest" class="form-control" value="#" name="pinterest" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 clearfix">
+                            <div class="submit">
+                                <input class="btn btn-primary btn-lg" id="profile_submit" value="Update" type="submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                </form>
+                <form id="password_form" name="password_form" class="form profile-form">
+                    <!--<div class="control-group">
+                        <div class="group-title">
+                            Change Password</div>
+                        <div class="group-container row">
+                            <div class="col-md-12">
+                                <div class="form-group s-profile-old_pass">
+                                    <label for="old_pass">Old Password</label>
+                                    <input id="old_pass" class="form-control" value="" name="old_pass" type="password">
+                                </div>
+                                <div class="form-group s-profile-new_pass">
+                                    <label for="new_pass">New Password</label>
+                                    <input id="new_pass" class="form-control" value="" name="new_pass" type="password">
+                                </div>
+                                <div class="form-group s-profile-new_pass_confirm">
+                                    <label for="new_pass_confirm">Confirm New Password</label>
+                                    <input id="new_pass_confirm" class="form-control" value="" name="new_pass_confirm" type="password">
+                                </div>
+                            </div>
+                            <div class="col-md-12 clearfix">
+                                <div class="submit">
+                                    <input class="btn btn-primary btn-lg" id="password_submit" value="Change Password" type="submit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </form>
+            </div>
+
+        </div><!-- end content -->
+    </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end generalwrapper -->
+
+</div>
+</div>
+
+<!-- footer 전체 -->
+<div class="callout dark"><!-- add "styleBackgroundColor" class for colored background and white text OR "dark" for a dark callout -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9"><!-- title + shortdesc -->
+
+                <p>ICIA <strong>Allright</strong> for free!</p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <!-- col #1 -->
+            <div class="logo_footer dark col-md-4">
+                <img alt="park" src="img/park1.png" class="footer-logo">
+                <p class="block">
+                    인천광역시 미추홀구 매소홀로 488번길 6-32 태승빌딩 5층<br>
+
+                    Email:icia@icia.com<br>
+                    Phone: 0507-1491-3360<br>
+                </p>
+
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>AllRight 프로젝트</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li><h3>조원소개</h3>
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀장: 여승재
+                    </li>
+                    <li>
+                        <i class="fa fa-twitter"></i>팀원: 김경환, 이준혁, 정상훈, 최우진
+                    </li>
+                </ul>
+            </div>
+
+            <div class="spaced col-md-4 col-sm-6 hidden-xs">
+                <h4><strong>프로젝트 소개</strong></h4>
+                <ul class="list-unstyled fsize13">
+                    <li>
+                        다양한 주차장 정보, 주차 공유,
+
+                        스마트 주차 서비스까지 한번에!
+                    </li>
+                    <li>
+                        주차난을 완화하기 위한 프로젝트!
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="copyright">
+        <div class="container text-center fsize12">
+            Asad estate by  <a href="https://www.icia.co.kr/" target="_blank" title="bootstrap real estate  themes &amp; templates" class="copyright">@ICIA</a> •  &nbsp;
+            <a href="#" class="fsize11">Privacy Policy</a> •
+            <a href="#" class="fsize11">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+<!-- footer 끝-->
+
+<!-- Bootstrap core and JavaScript's
+================================================== -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.parallax.js"></script>
+<script src="js/jquery.fitvids.js"></script>
+<script src="js/jquery.unveilEffects.js"></script>
+
+<script src="js/bootstrap-select.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/nicescroll.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

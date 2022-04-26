@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<h1>카카오페이결제</h1>
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script>
+    let parr = [];
+    let parrinfo = new Object();
+    parrinfo.pCode = [[${parkinglot.pCode}]];
+    parr.push(parrinfo.pCode);
+    parrinfo.pName = '[[${parkinglot.pName}]]';
+    parr.push(parrinfo.pName);
+    parrinfo.pPrice = [[${parkinglot.pPrice}]];
+    parr.push(parrinfo.pPrice);
+
+    /*[/]*/
+
+    var IMP = window.IMP;
+    IMP.init('imp02696605');
+    let loginId = '[[${session.loginId}]]';
+    console.log(loginId);
+    IMP.request_pay({
+        pg : "kakaopay",
+        pay_method : 'card',
+        merchant_uid : parr[0],
+        name : parr[1],
+        amount : parr[2],
+        buyer_email : '구매자 이메일',
+        buyer_name : loginId,
+        buyer_tel : '010-3312-1657',
+        buyer_addr : '구매자 주소',
+        buyer_postcode : '구매자 주소',
+        m_redirect_url : 'redirect url'
+    }, function(rsp) {
+        if (rsp.success) {
+            var msg = '결제가 완료되었습니다.';
+            msg += '구매자 ID : ' + rsp.buyer_name;
+            msg += '주차장 코드 : ' + rsp.merchant_uid;
+            msg += '주차장 이름 : ' + rsp.name;
+            msg += '상품명 : ' + rsp.paid_amount;
+            alert(msg);
+            location.href = "pReserve?rId=" + loginId + "&rPcode=" + parr[0];
+        } else {
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+            msg += '구매자 ID : ' + rsp.buyer_name;
+            alert(msg);
+            location.href = "pView?pCode='[[${parkinglot.pCode}]]'"
+        }
+
+
+    });
+</script>
+
+</html>

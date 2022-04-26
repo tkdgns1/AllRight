@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icia.allright.dao.MDAO">
+    <insert id="mJoin" parameterType="member">
+        INSERT INTO AMEMBER VALUES(#{mId}, #{mPw}, #{mName}, #{mBirth} , #{mPhone},#{mLicenceName})
+    </insert>
+
+    <select id="idOverlap" parameterType="String" resultType="String">
+        SELECT MID FROM AMEMBER
+        WHERE MID=#{mId}
+    </select>
+
+    <select id="mLogin" parameterType="member" resultType="member">
+        SELECT * FROM AMEMBER WHERE MID=#{mId}
+    </select>
+
+    <insert id="qWrite" parameterType="question">
+        INSERT INTO AQUESTION VALUES(AQNO_SEQ.NEXTVAL, #{qId}, #{qTitle}, #{qContent} , #{qPname},#{qFilename})
+    </insert>
+
+    <select id="mqList" parameterType="String" resultType="question">
+        SELECT * FROM AQUESTION WHERE QID=#{qId} ORDER BY QNO ASC
+    </select>
+
+    <select id="mqView" parameterType="int" resultType="question">
+        SELECT * FROM AQUESTION WHERE QNO = #{qNo}
+    </select>
+
+    <select id="mView" parameterType="String" resultType="member">
+        SELECT * FROM AMEMBER WHERE MID=#{mId}
+    </select>
+
+    <update id="mModify" parameterType="member">
+        UPDATE AMEMBER SET MPW=#{mPw}, MPHONE=#{mPhone}, MLICENCENAME=#{mLicenceName} WHERE MID=#{mId}
+    </update>
+
+    <delete id="mDelete" parameterType="String">
+        DELETE FROM AMEMBER WHERE MID=#{mId}
+    </delete>
+
+    <select id="mfList" parameterType="String" resultType="favorite">
+        SELECT * FROM FAVORITE WHERE FID=#{fId} ORDER BY FNO ASC
+    </select>
+
+    <delete id="mfDelete" parameterType="favorite">
+        DELETE FROM FAVORITE WHERE FID=#{fId} AND FPCODE=#{fPcode}
+    </delete>
+
+    <select id="plist" resultType="parkinglot">
+        SELECT PNAME FROM PARKINGLOT
+    </select>
+
+    <update id="qModify" parameterType="question">
+        UPDATE AQUESTION SET QTITLE=#{qTitle}, QCONTENT=#{qContent}, QPNAME=#{qPname}, QFILENAME=#{qFilename} WHERE QNO=#{QNo}
+    </update>
+
+    <select id="revList" parameterType="String" resultType="review">
+        SELECT * FROM REVIEW WHERE REID=#{reId} ORDER BY RENO ASC
+    </select>
+
+    <select id="revView" parameterType="int" resultType="review">
+        SELECT * FROM REVIEW WHERE RENO = #{reNo}
+    </select>
+
+    <delete id="qDelete" parameterType="int">
+        DELETE FROM AQUESTION WHERE QNO=#{qNo}
+    </delete>
+
+    <update id="reModify" parameterType="review">
+        UPDATE REVIEW SET RETITLE=#{reTitle}, RECONTENT=#{reContent}, REPNAME=#{rePname}, REFILENAME=#{reFilename} WHERE reNO=#{reNo}
+    </update>
+
+    <delete id="reDelete" parameterType="review">
+        DELETE FROM REVIEW WHERE RENO=#{reNo}
+    </delete>
+
+    <select id="eList" parameterType="String" resultType="expiration">
+        SELECT * FROM EXPIRATION WHERE EID=#{eId} ORDER BY ENO ASC
+    </select>
+
+    <select id="eView" parameterType="int" resultType="expiration">
+        SELECT * FROM EXPIRATION WHERE ENO = #{eNo}
+    </select>
+</mapper>

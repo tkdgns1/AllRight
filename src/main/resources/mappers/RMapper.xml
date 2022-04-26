@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icia.allright.dao.RDAO">
+    <insert id="pReserve" parameterType="RESERVE">
+        INSERT INTO RESERVE VALUES(RNO_SEQ.NEXTVAL,#{rId}, #{rPcode}, #{rPname}, #{rPaddr} , #{rPrice}, SYSDATE)
+    </insert>
+
+    <select id="rList" parameterType="String" resultType="RESERVE">
+        SELECT * FROM RESERVE WHERE RID=#{rId}
+    </select>
+
+    <select id="rView" parameterType="int" resultType="RESERVE">
+        SELECT * FROM RESERVE WHERE RNO = #{rNo}
+    </select>
+
+    <insert id="reWrite" parameterType="review">
+        INSERT INTO REVIEW VALUES(RENO_SEQ.NEXTVAL, #{reId}, #{reTitle}, #{reContent}, #{rePname}, #{reFilename})
+    </insert>
+
+    <update id="minus" parameterType="String">
+        UPDATE PARKINGLOT SET PAVAIL=PAVAIL-1 WHERE PCODE=#{rPcode}
+    </update>
+
+    <delete id="rDelete" parameterType="reserve">
+        DELETE FROM RESERVE WHERE RNO=#{rNo} AND RID=#{rId}
+    </delete>
+</mapper>

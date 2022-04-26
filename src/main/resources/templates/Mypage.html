@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Mypage</title>
+</head>
+<body>
+<h1>오라이~프로젝트 마이페이지</h1>
+<button onclick="location.href='index'">홈으로~</button>
+<a th:href="@{mView(mId=${session.loginId})}"><button>내정보</button></a>
+
+<a th:href="@{rList(rId=${session.loginId})}"><button>결제리스트</button></a>
+<a th:href="@{eList(eId=${session.loginId})}"><button>주차완료</button></a>
+
+<a th:href="@{mqList(qId=${session.loginId})}"><button>내문의목록</button></a>
+<a th:href="@{revList(reId=${session.loginId})}"><button>내후기목록</button></a>
+<a th:href="@{mfList(fId=${session.loginId})}"><button>즐겨찾기</button></a>
+</body>
+</html>
